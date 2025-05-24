@@ -1,12 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plataforma Coop</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma Cooperativa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, sans-serif;
+    }
+  </style>
+  <script>
+    let estado = {
+      seccion: "inicio",
+      tramite: null,
+      solicitud: null
+    };
+
+    function mostrarSeccion(nombre) {
+      estado.seccion = nombre;
+      estado.tramite = null;
+      estado.solicitud = null;
+      renderizar();
+    }
+
+    function seleccionarTramite(nombre) {
+      estado.tramite = nombre;
+      estado.solicitud = null;
+      renderizar();
+    }
+
+    function seleccionarSolicitud(tipo) {
+      estado.solicitud = tipo;
+      renderizar();
+    }
+
+    function mostrarVistaPrevia() {
+      const campos = ["calle", "numero", "dto", "piso", "dpto", "zn", "mza", "parc"];
+      const datos = campos.map(id => document.getElementById(id).value.trim());
+
+      if (datos.some(valor => valor === '')) {
+        alert("Por favor complete todos los campos obligatorios marcados con *.");
+        return;
+      }
+
+      let contenido = "<h4 class='text-md font-bold mb-2'>Resumen de la solicitud:</h4><ul class='list-disc pl-6 text-sm text-gray-700'>";
+      campos.forEach(id => {
+        const label = document.querySelector(`label[for='${id}']`).textContent;
+        const valor = document.getElementById(id).value;
+        contenido += `<li><strong>${label}:</strong> ${valor}</li>`;
+      });
+      contenido += "</ul>";
+
+      document.getElementById("vista-previa").innerHTML = contenido;
+    }
+
+    function renderizar() {
+      document.querySelectorAll('[data-seccion]').forEach(el => el.classList.add('hidden'));
+
+      if (estado.seccion === "tramite") {
+        document.getElementById("tarjetas-tramite").classList.remove("hidden");
+        if (estado.tramite === "agua") {
+          document.getElementById("opciones-agua").classList.remove("hidden");
+          if (estado.solicitud === "nueva") {
+            document.getElementById("formulario-domicilio").classList.remove("hidden");
+          }
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderizar);
+  </script>
+</head>
+<body class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r shadow-sm p-6 space-y-6">
+    <div class="text-xl font-bold text-gray-700">Menú</div>
+    <nav class="space-y-4">
+      <button onclick="mostrarSeccion('perfil')" class="block text-left w-full text-gray-700 hover:text-blue-700">Perfil</button>
+      <button onclick="mostrarSeccion('tramite')" class="block text-left w-full text-gray-700 hover:text-blue-700">Trámite</button>
+      <button onclick="mostrarSeccion('notificaciones')" class="block text-left w-full text-gray-700 hover:text-blue-700">Notificaciones</button>
+      <button onclick="mostrarSeccion('faq')" class="block text-left w-full text-gray-700 hover:text-blue-700">Preguntas frecuentes</button>
+      <button class="block text-left w-full text-red-600">Cerrar sesión</button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 space-y-10 overflow-y-auto">
+    <div id="tarjetas-tramite" data-seccion class="hidden">
+      <h2 class="text-xl font-semibold mb-4">Seleccione un tipo de trámite</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div onclick="seleccionarTramite('agua')" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg cursor-pointer">
+          <h2 class="text-lg font-bold text-blue-700">AGUA</h2>
+          <p class="text-sm text-gray-500">Suministro de Servicio</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <h2 class="text-lg font-bold text-blue-700">CLOACAS</h2>
+          <p class="text-sm text-gray-500">Suministro de Servicio</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <h2 class="text-lg font-bold text-blue-700">CATASTRO</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="opciones-agua" data-seccion class="hidden">
+      <h2 class="text-xl font-semibold mt-8 mb-4">Solicitud de Agua</h2>
+      <div class="flex gap-4">
+        <button onclick="seleccionarSolicitud('nueva')" class="px-4 py-2 bg-blue-600 text-white rounded-md">Nueva Solicitud</button>
+        <button onclick="seleccionarSolicitud('buscar')" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md">Buscar Solicitud</button>
+      </div>
+    </div>
+
+    <section id="formulario-domicilio" data-seccion class="hidden bg-white rounded-xl shadow-md p-8">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Datos del Domicilio</h3>
+      <form class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div><label for="calle" class="block font-bold text-gray-700 text-xs uppercase">Calle *</label><input id="calle" type="text" class="w-full border border-blue-300 rounded-md p-2" required></div>
+        <div><label for="numero" class="block font-bold text-gray-700 text-xs uppercase">Número *</label><input id="numero" type="number" class="w-full border border-blue-300 rounded-md p-2" required></div>
+        <div><label for="dto" class="block font-bold text-gray-700 text-xs uppercase">DTO *</label><input id="dto" type="text" class="w-full border border-blue-300 rounded-md p-2"></div>
+        <div><label for="piso" class="block font-bold text-gray-700 text-xs uppercase">Piso</label><input id="piso" type="text" class="w-full border border-blue-300 rounded-md p-2"></div>
+        <div><label for="dpto" class="block font-bold text-gray-700 text-xs uppercase">Dpto.</label><input id="dpto" type="text" class="w-full border border-blue-300 rounded-md p-2"></div>
+        <div><label for="zn" class="block font-bold text-gray-700 text-xs uppercase">ZN *</label><input id="zn" type="number" class="w-full border border-blue-300 rounded-md p-2" required></div>
+        <div><label for="mza" class="block font-bold text-gray-700 text-xs uppercase">MZA *</label><input id="mza" type="number" class="w-full border border-blue-300 rounded-md p-2" required></div>
+        <div><label for="parc" class="block font-bold text-gray-700 text-xs uppercase">PARC *</label><input id="parc" type="number" class="w-full border border-blue-300 rounded-md p-2" required></div>
+      </form>
+      <div class="flex justify-end mt-6 gap-4">
+        <button class="px-4 py-2 bg-gray-300 rounded-md text-gray-700">Anterior</button>
+        <button type="button" onclick="mostrarVistaPrevia()" class="px-4 py-2 bg-blue-600 text-white rounded-md">Siguiente</button>
+      </div>
+      <div id="vista-previa" class="mt-8 bg-blue-50 border border-blue-200 p-4 rounded-md"></div>
+    </section>
+  </main>
+</body>
 </html>
