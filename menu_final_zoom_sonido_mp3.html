@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menú Fijo con Secciones</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@font-face {
+  font-family: 'SF Pro Display Heavy';
+  src: url('SF-Pro-Display-Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: 'SF Pro Display Heavy', sans-serif;
+}
+
+    @font-face {
+      font-family: 'SF Pro Condensed Heavy';
+      src: url('SF-Pro-Condensed-Heavy.ttf') format('truetype');
+    }
+    body {
+      font-family: 'SF Pro Condensed Heavy', sans-serif;
+    }
+    
+    @font-face {
+      font-family: 'SF Pro';
+      src: url('SF-Pro.ttf') format('truetype');
+    }
+    body {
+      font-family: 'SF Pro', sans-serif;
+    }
+    .btn-verde {
+      background-color: #34A853;
+      color: white;
+    }
+    .tarjeta.clicked + .botones,
+    .tarjeta:hover + .botones {
+      opacity: 1;
+      max-height: 10rem;
+      pointer-events: auto;
+    }
+  
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+  background-color: #2C8E45;
+}</style>
+<link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet"/></head>
+<body class="bg-gray-100 min-h-screen flex">
+<audio id="hoverSound" preload="auto" src="mixkit-typewriter-soft-click-1125.mp3"></audio>
+<!-- Menú lateral siempre visible -->
+<aside class="w-64 bg-white shadow pt-10 pb-6 px-6 min-h-[420px]" style="font-family: 'SF Pro Semibold', sans-serif;">
+<nav class="space-y-2 mt-2">
+<div class="rounded-full hover:bg-[#0360ff] flex duration-300 gap-4 item-menu hover:text-white cursor-pointer hover:scale-105 font-medium transform items-center transition-all py-2 px-3" onclick="mostrarSeccion('perfil')" onmouseenter="document.getElementById('hoverSound').play()">
+<i class="fi fi-rr-user text-xl align-middle"></i> <span>Perfil</span>
+</div>
+<div class="rounded-full hover:bg-[#0360ff] flex duration-300 gap-4 item-menu hover:text-white cursor-pointer hover:scale-105 font-medium transform items-center transition-all py-2 px-3" onclick="mostrarSeccion('tramite')" onmouseenter="document.getElementById('hoverSound').play()">
+<i class="fi fi-rr-document text-xl align-middle"></i> <span>Trámite</span>
+</div>
+<div class="rounded-full hover:bg-[#0360ff] flex duration-300 gap-4 item-menu hover:text-white cursor-pointer hover:scale-105 font-medium transform items-center transition-all py-2 px-3" onclick="mostrarSeccion('notificaciones')" onmouseenter="document.getElementById('hoverSound').play()">
+<i class="fi fi-rr-bell text-xl align-middle"></i> <span>Notificaciones</span>
+</div>
+<div class="rounded-full hover:bg-[#0360ff] flex duration-300 gap-4 item-menu hover:text-white cursor-pointer hover:scale-105 font-medium transform items-center transition-all py-2 px-3" onclick="mostrarSeccion('preguntas')" onmouseenter="document.getElementById('hoverSound').play()">
+<i class="fi fi-rr-interrogation text-xl align-middle"></i> <span>Preguntas Frecuentes</span>
+</div>
+<div class="pt-6 mt-10 border-t border-gray-200">
+<div class="rounded-full hover:bg-[#0360ff] flex duration-300 gap-4 item-menu text-[#f93013] hover:text-white cursor-pointer hover:scale-105 mt-6 font-medium transform items-center transition-all py-2 px-3" onmouseenter="document.getElementById('hoverSound').play()">
+<i class="fi fi-rr-exit text-xl align-middle"></i>
+<span>Cerrar sesión</span>
+</div>
+</div>
+</nav>
+</aside>
+<!-- Contenido a la derecha del menú -->
+<main class="flex-1 p-8">
+<!-- Sección Trámite (visible por defecto) -->
+<section id="seccion-tramite">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Tarjeta Agua -->
+<div class="flex flex-col items-center">
+<div class="tarjeta w-full max-w-[520px] hover:scale-[1.03] ease-in transition-transform p-3 relative shadow-md sm:rounded-3xl group duration-200 sm:p-4 rounded-xl box-border" onclick="toggleBotones(this)" style="width:570px; height:270px; background: linear-gradient(30deg, #0360FF, #25C3FD); cursor:pointer;"><div class="absolute top-8 right-8 w-10 h-10"><?xml version="1.0" encoding="UTF-8"?>
+<i class="fi fi-rr-document text-[2.75rem] text-white"></i></div><h2 class="text-white text-3xl font-bold ml-8.5" style="margin-top:8px; margin-left:10px;">AGUA</h2>
+<div class="absolute bottom-12 left-8 right-8"><p class="text-white text-sm mb-1">Suministro de Servicio</p><div class="w-full h-[5px] bg-white/30 rounded-full overflow-hidden">
+<div class="w-[20%] h-full bg-white rounded-full"></div>
+</div></div></div>
+<div class="botones opacity-0 max-h-0 pointer-events-none transition-all duration-500 ease-in-out flex gap-4 mt-4">
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 14.42 14.42" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" width="2.51" x="5.96"></rect> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" transform="translate(0 14.42) rotate(-90)" width="2.51" x="5.96" y="0"></rect> </g> </g></svg>
+
+Nueva Solicitud</button>
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 16.85 16.85" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <path class="cls-1" d="M6.59,0C2.95,0,0,2.95,0,6.59s2.95,6.58,6.59,6.58,6.58-2.95,6.58-6.58S10.23,0,6.59,0ZM6.59,11.03c-2.46,0-4.45-1.99-4.45-4.44s1.99-4.44,4.45-4.44,4.44,1.99,4.44,4.44-1.99,4.44-4.44,4.44Z"></path> <rect class="cls-1" height="9.45" rx="1.02" ry="1.02" transform="translate(-5.46 13.17) rotate(-45)" width="2.16" x="12.09" y="8.45"></rect> </g> </g></svg>
+
+Buscar Solicitud</button>
+</div>
+</div>
+<!-- Tarjeta Cloaca -->
+<div class="flex flex-col items-center">
+<div class="tarjeta w-full max-w-[520px] hover:scale-[1.03] ease-in transition-transform p-3 relative shadow-md sm:rounded-3xl group duration-200 sm:p-4 rounded-xl box-border" onclick="toggleBotones(this)" style="width:570px; height:270px; background: linear-gradient(30deg, #f40a23, #fe5701); cursor:pointer;"><div class="absolute top-8 right-8 w-10 h-10"><?xml version="1.0" encoding="UTF-8"?>
+<i class="fi fi-rr-document text-[2.75rem] text-white"></i></div><h2 class="text-white text-3xl font-bold ml-8.5" style="margin-top:8px; margin-left:10px;">CLOACAS</h2>
+<div class="absolute bottom-12 left-8 right-8"><p class="text-white text-sm mb-1">Suministro de Servicio</p><div class="w-full h-[5px] bg-white/30 rounded-full overflow-hidden">
+<div class="w-[20%] h-full bg-white rounded-full" style="width: 0%"></div>
+</div></div></div>
+<div class="botones opacity-0 max-h-0 pointer-events-none transition-all duration-500 ease-in-out flex gap-4 mt-4">
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 14.42 14.42" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" width="2.51" x="5.96"></rect> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" transform="translate(0 14.42) rotate(-90)" width="2.51" x="5.96" y="0"></rect> </g> </g></svg>
+
+Nueva Solicitud</button>
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 16.85 16.85" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <path class="cls-1" d="M6.59,0C2.95,0,0,2.95,0,6.59s2.95,6.58,6.59,6.58,6.58-2.95,6.58-6.58S10.23,0,6.59,0ZM6.59,11.03c-2.46,0-4.45-1.99-4.45-4.44s1.99-4.44,4.45-4.44,4.44,1.99,4.44,4.44-1.99,4.44-4.44,4.44Z"></path> <rect class="cls-1" height="9.45" rx="1.02" ry="1.02" transform="translate(-5.46 13.17) rotate(-45)" width="2.16" x="12.09" y="8.45"></rect> </g> </g></svg>
+
+Buscar Solicitud</button>
+</div>
+</div>
+<!-- Tarjeta Catastro -->
+<div class="flex flex-col items-center">
+<div class="tarjeta w-full max-w-[520px] hover:scale-[1.03] ease-in transition-transform p-3 relative shadow-md sm:rounded-3xl group duration-200 sm:p-4 rounded-xl box-border" onclick="toggleBotones(this)" style="width:570px; height:270px; background: linear-gradient(30deg, #801dec, #db6ac4); cursor:pointer;"><div class="absolute top-8 right-8 w-10 h-10"><?xml version="1.0" encoding="UTF-8"?>
+<i class="fi fi-rr-document text-[2.75rem] text-white"></i></div><h2 class="text-white text-3xl font-bold ml-8.5" style="margin-top:8px; margin-left:10px;">CATASTRO</h2>
+<div class="absolute bottom-12 left-8 right-8"><p class="text-white text-sm mb-1">Suministro de Servicio</p><div class="w-full h-[5px] bg-white/30 rounded-full overflow-hidden">
+<div class="w-[0%] h-full bg-white rounded-full"></div>
+</div></div></div>
+<div class="botones opacity-0 max-h-0 pointer-events-none transition-all duration-500 ease-in-out flex gap-4 mt-4">
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 14.42 14.42" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" width="2.51" x="5.96"></rect> <rect class="cls-1" height="14.42" rx="1.1" ry="1.1" transform="translate(0 14.42) rotate(-90)" width="2.51" x="5.96" y="0"></rect> </g> </g></svg>
+
+Nueva Solicitud</button>
+<button class="i m flex ease-out p r 2 ease-in-out btn-verde x t px-4 duration-300 text-base c - n a font-semibold py-2 uppercase l f font-extrabold g s gap-2 text-sm items-center e duration-500 ease-in-out bg-[#34A853] duration-500 ease-in-out bg-[#34A853] hover:scale-[1.05] transition-transform duration-300 ease-in-out" onclick="iniciarNuevaSolicitud()"><svg class="w-4 h-4 mr-1 inline-block align-middle fill-white" data-name="Layer 2" id="Layer_2" viewbox="0 0 16.85 16.85" xmlns="http://www.w3.org/2000/svg"> <defs> <style>      .cls-1 {        fill: #fff;      }    
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url('SF-Pro-Semibold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+</style> </defs> <g data-name="Layer 1" id="Layer_1-2"> <g> <path class="cls-1" d="M6.59,0C2.95,0,0,2.95,0,6.59s2.95,6.58,6.59,6.58,6.58-2.95,6.58-6.58S10.23,0,6.59,0ZM6.59,11.03c-2.46,0-4.45-1.99-4.45-4.44s1.99-4.44,4.45-4.44,4.44,1.99,4.44,4.44-1.99,4.44-4.44,4.44Z"></path> <rect class="cls-1" height="9.45" rx="1.02" ry="1.02" transform="translate(-5.46 13.17) rotate(-45)" width="2.16" x="12.09" y="8.45"></rect> </g> </g></svg>
+
+Buscar Solicitud</button>
+</div>
+</div>
+</div></div>
+</section>
+<!-- Otras secciones ocultas -->
+<section class="hidden" id="seccion-perfil">
+<p class="text-gray-600">Perfil (contenido en desarrollo).</p>
+</section>
+<section class="hidden" id="seccion-notificaciones">
+<p class="text-gray-600">Notificaciones (contenido en desarrollo).</p>
+</section>
+<section class="hidden" id="seccion-preguntas">
+<p class="text-gray-600">Preguntas Frecuentes (contenido en desarrollo).</p>
+</section>
+</main>
+<script>
+    function iniciarNuevaSolicitud() {
+      alert('Función Nueva Solicitud activa');
+    }
+    
+    function mostrarSeccion(nombre) {
+      const secciones = ['tramite', 'perfil', 'notificaciones', 'preguntas'];
+      secciones.forEach(id => {
+        const s = document.getElementById('seccion-' + id);
+        if (s) s.classList.add('hidden');
+      });
+      const activa = document.getElementById('seccion-' + nombre);
+      if (activa) activa.classList.remove('hidden');
+    }
+  </script>
+<audio id="hover-sound" preload="auto" src="bubble.mp3"></audio>
+<script>
+  const hoverSound = document.getElementById('hover-sound');
+  document.body.addEventListener('click', () => {
+    hoverSound.play().catch(() => {});
+  }, { once: true });
+
+  document.querySelectorAll('.item-menu').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play();
+    });
+  });
+</script>
+<script>
+  document.querySelectorAll('.item-menu').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.item-menu').forEach(i => {
+        i.classList.remove('bg-[#0360ff]', 'text-white');
+        i.classList.remove('activo');
+      });
+      item.classList.add('bg-[#0360ff]', 'text-white');
+      item.classList.add('activo');
+    });
+  });
+</script>
+<script>
+  const tarjetas = document.querySelectorAll('.tarjeta');
+  const botones = document.querySelectorAll('.botones');
+
+  function toggleBotones(tarjetaClickeada) {
+    tarjetas.forEach(t => {
+      const b = t.nextElementSibling;
+      if (t === tarjetaClickeada) {
+        const visible = t.classList.contains('clicked');
+        if (visible) {
+          t.classList.remove('clicked');
+          b.classList.add('opacity-0', 'max-h-0', 'pointer-events-none');
+          b.classList.remove('opacity-100', 'max-h-40');
+        } else {
+          t.classList.add('clicked');
+          b.classList.remove('opacity-0', 'max-h-0', 'pointer-events-none');
+          b.classList.add('opacity-100', 'max-h-40');
+        }
+      } else {
+        t.classList.remove('clicked');
+        b.classList.add('opacity-0', 'max-h-0', 'pointer-events-none');
+        b.classList.remove('opacity-100', 'max-h-40');
+      }
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    const clickedInside = [...tarjetas].some(t => t.contains(e.target) || t.nextElementSibling.contains(e.target));
+    if (!clickedInside) {
+      tarjetas.forEach(t => t.classList.remove('clicked'));
+      botones.forEach(b => {
+        b.classList.add('opacity-0', 'max-h-0', 'pointer-events-none');
+        b.classList.remove('opacity-100', 'max-h-40');
+      });
+    }
+  });
+</script>
+</body>
+</html>
